@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Fragmento de Tarjeta de Videojuego -->
+    <div th:fragment="card(videojuego)" class="card h-100">
+        <div class="position-relative">
+            <!-- Precio Badge -->
+            <span class="price-badge">
+                $<span th:text="${#numbers.formatDecimal(videojuego.precio, 1, 2)}">59.99</span>
+            </span>
+            
+            <!-- Categoría Badge -->
+            <span class="category-badge" th:text="${videojuego.categoria}">Categoría</span>
+            
+            <!-- Imagen del videojuego -->
+            <img th:src="${videojuego.imagen}" 
+                 th:alt="${videojuego.nombre}"
+                 class="card-img-top"
+                 onerror="this.src='https://via.placeholder.com/400x250?text=Sin+Imagen'">
+        </div>
+        
+        <div class="card-body d-flex flex-column">
+            <!-- Nombre -->
+            <h5 class="card-title fw-bold" th:text="${videojuego.nombre}">Nombre del Juego</h5>
+            
+            <!-- Descripción -->
+            <p class="card-text text-muted flex-grow-1" 
+               th:text="${#strings.abbreviate(videojuego.descripcion, 100)}">
+                Descripción del videojuego...
+            </p>
+            
+            <!-- Botones -->
+            <div class="d-grid gap-2">
+                <a href="#" class="btn btn-primary">
+                    <i class="bi bi-eye"></i> Ver Detalles
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer de la tarjeta -->
+        <div class="card-footer bg-light text-center">
+        </div>
+    </div>
+</body>
+</html>
