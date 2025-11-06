@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tienda.videojuegos.domain.Videojuego;
@@ -44,5 +45,16 @@ public class VideojuegoController {
     public String agregarVideojuego(@ModelAttribute Videojuego videojuego) {
         videojuegoService.guardar(videojuego);
         return "redirect:/videojuegos";
+    }
+
+    // Ver detalle de un videojuego
+    @GetMapping("/videojuegos/{id}")
+    public String verDetalle(@PathVariable("id") Long id, Model model) {
+        Videojuego videojuego = videojuegoService.obtenerPorId(id);
+        if (videojuego == null) {
+            return "redirect:/videojuegos";
+        }
+        model.addAttribute("videojuego", videojuego);
+        return "detail";
     }
 }

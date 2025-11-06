@@ -23,4 +23,9 @@ public class VideojuegoService {
     public void guardar(Videojuego videojuego) {
         videojuegoRepository.save(videojuego);
     }
+
+    @Transactional(readOnly = true)
+    public Videojuego obtenerPorId(Long id) {
+        return videojuegoRepository.findById(id).orElse(null);
+    }
 }
